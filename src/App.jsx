@@ -20,10 +20,32 @@ import {
   faYoutube,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons"
-import { userContext } from "./Components/Context/UserContext"
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
 
-library.add(faTwitter, faFacebook, faYoutube, faLinkedin)
+import {
+  faDiagramProject,
+  faMoneyBillWave,
+  faStar,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons"
+
+faMoneyBillWave
+
+import { userContext } from "./Components/Context/UserContext"
+
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
+import ProductDetails from "./Components/ProductDetails/ProductDetails"
+import CartContextProvider from "./Components/Context/cartContext"
+
+library.add(
+  faTwitter,
+  faFacebook,
+  faYoutube,
+  faLinkedin,
+  faStar,
+  faMoneyBillWave,
+  faUsers,
+  faDiagramProject
+)
 let routers = createBrowserRouter([
   {
     path: "/",
@@ -81,6 +103,14 @@ let routers = createBrowserRouter([
         ),
       },
       {
+        path: "product/:productId/:productName",
+        element: (
+          <ProtectedRoute>
+            <ProductDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "*",
         element: <Notfound />,
       },
@@ -95,7 +125,11 @@ function App() {
       setUserToken(localStorage.getItem("userToken"))
     }
   }, [])
-  return <RouterProvider router={routers}></RouterProvider>
+  return (
+    <CartContextProvider>
+      <RouterProvider router={routers}></RouterProvider>
+    </CartContextProvider>
+  )
 }
 
 export default App
