@@ -8,7 +8,7 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <div className="container py-5">
+      <div className="container">
         <Outlet></Outlet>
       </div>
       <Footer />

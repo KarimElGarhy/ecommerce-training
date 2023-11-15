@@ -5,23 +5,33 @@ import axios from "axios"
 import { useQuery } from "react-query"
 import { Circles } from "react-loader-spinner"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
+import Slider from "react-slick"
+import { Helmet } from "react-helmet"
 function ProductDetails() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  }
   let prams = useParams()
 
-  console.log(prams.productId)
   function getProductDetail(id) {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
   }
-  let { data, isFetching, isLoading } = useQuery(`productDetails`, () =>
+  let { data, isLoading, isFetched } = useQuery(`productDetails`, () =>
     getProductDetail(prams.productId)
   )
   let OurData = data?.data.data
   return (
-    <>
-      {isLoading ? (
+    <div className="py-5 row">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{OurData?.title}</title>
+      </Helmet>
+      {isFetched ? (
         <div className="d-flex justify-content-center align-items-center py-5">
-          {" "}
           <Circles
             height="80"
             width="80"
@@ -30,6 +40,9 @@ function ProductDetails() {
             wrapperStyle={{}}
             wrapperClass=""
             visible={true}
+            autoplay="true"
+            autoplaySpeed="2000"
+            cssEase="linear"
           />
         </div>
       ) : (
@@ -37,11 +50,16 @@ function ProductDetails() {
           <h1 className="text-start">{OurData.title}</h1>
           <div className="row">
             <div className="col-3">
-              <img
-                className="img-fluid"
-                alt={OurData.slug}
-                src={OurData.imageCover}
-              />
+              <Slider {...settings}>
+                {OurData.images.map((imgEle, index) => (
+                  <img
+                    key={index}
+                    src={imgEle}
+                    alt={OurData.slug}
+                    className="img-fluid"
+                  />
+                ))}
+              </Slider>
             </div>
             <div className="col-5 d-flex flex-column text-start align-content-center justify-content-center">
               <p>{OurData.description}</p>
@@ -82,7 +100,7 @@ function ProductDetails() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

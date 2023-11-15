@@ -13,7 +13,6 @@ function FeaturedProducts() {
 
   return (
     <>
-      <h1 className="text-start">Featured Products</h1>
       <div className="row g-3 py-5">
         {/* Card */}
 

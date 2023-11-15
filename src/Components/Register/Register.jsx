@@ -5,6 +5,7 @@ import * as Yup from "yup"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { Hourglass } from "react-loader-spinner"
+import { Helmet } from "react-helmet"
 function Register() {
   let navigate = useNavigate()
   const [error, setError] = useState(null)
@@ -60,6 +61,9 @@ function Register() {
 
   return (
     <>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <div className="w-75 mx-auto my-5">
         <h1>Register New Account </h1>
         {error ? (

@@ -6,6 +6,7 @@ import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
 import { Hourglass } from "react-loader-spinner"
 import { userContext } from "../Context/UserContext"
+import { Helmet } from "react-helmet"
 function Login() {
   let { setUserToken } = useContext(userContext)
   let navigate = useNavigate()
@@ -47,6 +48,9 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className="w-75 mx-auto my-5">
         <h1>Login </h1>
         {error ? (
