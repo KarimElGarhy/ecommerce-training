@@ -65,6 +65,7 @@ function Login() {
             id="email"
             placeholder="Your email"
             name="email"
+            autoComplete="email"
             type="email"
             className="form-control"
             value={formik.values.email}
@@ -87,6 +88,7 @@ function Login() {
             placeholder="Your password"
             name="password"
             type="password"
+            autoComplete="current-password"
             className="form-control"
             value={formik.values.password}
             onChange={formik.handleChange}
