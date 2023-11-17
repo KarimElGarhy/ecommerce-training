@@ -1,9 +1,12 @@
 import axios from "axios"
 import { createContext } from "react"
 
-export let cartContext = createContext()
+export let CartContext = createContext()
+
 export default function CartContextProvider(props) {
-  let userToken = localStorage.getItem(`userToken`)
+  let headers = {
+    token: localStorage.getItem("userToken"),
+  }
   function addToCart(productId) {
     return axios
       .post(
@@ -11,15 +14,15 @@ export default function CartContextProvider(props) {
         {
           productId: productId,
         },
-        { headers: userToken }
+        { headers }
       )
       .then((response) => response)
       .catch((error) => error)
   }
 
   return (
-    <cartContext.Provider value={{ addToCart }}>
+    <CartContext.Provider value={{ addToCart }}>
       {props.children}
-    </cartContext.Provider>
+    </CartContext.Provider>
   )
 }

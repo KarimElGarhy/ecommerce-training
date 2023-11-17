@@ -34,7 +34,7 @@ import { userContext } from "./Components/Context/UserContext"
 
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
 import ProductDetails from "./Components/ProductDetails/ProductDetails"
-import CartContextProvider from "./Components/Context/cartContext"
+import CartContextProvider from "./Components/Context/CartContext"
 
 library.add(
   faTwitter,
