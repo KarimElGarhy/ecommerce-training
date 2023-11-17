@@ -1,17 +1,28 @@
 /* eslint-disable react/prop-types */
-import React from "react"
+import React, { useContext } from "react"
 import Style from "./ProductCard.module.css"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { CartContext } from "../Context/CartContext"
+import toast from "react-hot-toast"
 
 function ProductCard(props) {
+  let { addToCart } = useContext(CartContext)
+  async function addCart(id) {
+    let x = await addToCart(props.id)
+    if (x.data.status == "success") {
+      toast.success(x.data.message)
+    } else {
+      toast.error(x.data.message)
+    }
+  }
   return (
     <div
       className=" product col-md-3 d-flex justify-content-center"
       key={props.id}
     >
       <div className="card">
-        <Link to={`/product/${props.productLink}/${props.slug}`}>
+        <Link to={`/product/${props.id}/${props.slug}`}>
           <img
             src={props.imageCover}
             className="card-img-top"
@@ -19,10 +30,7 @@ function ProductCard(props) {
           />
         </Link>
         <div className="card-body ">
-          <Link
-            to={`/product/${props.productLink}/${props.title}`}
-            className="nav-link"
-          >
+          <Link to={`/product/${props.id}/${props.title}`} className="nav-link">
             <h5 className="card-title">
               {props.title.split(" ").splice(0, 2).join(" ")}
             </h5>
@@ -41,7 +49,10 @@ function ProductCard(props) {
               {props.ratingsAverage}
             </p>
           </div>
-          <Link to={props.addToCart} className="btn bg-main text-white">
+          <Link
+            onClick={() => addCart(props?.id)}
+            className="btn bg-main text-white"
+          >
             Add To Cart
           </Link>
         </div>

@@ -35,7 +35,7 @@ function FeaturedProducts() {
               <ProductCard
                 key={product.id}
                 slug={product.slug}
-                productLink={product.id}
+                id={product.id}
                 imageCover={product.imageCover}
                 title={product.title}
                 category={product.category.name}
