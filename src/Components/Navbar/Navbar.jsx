@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import logo from "../../assets/freshcart-logo.svg"
 import { userContext } from "../Context/UserContext"
-
+import basketShop from "../../assets/shopping-basket.svg"
 function Navbar() {
   let { userToken, setUserToken } = useContext(userContext)
 
@@ -49,7 +49,7 @@ function Navbar() {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/cart">
-                      Cart
+                      <img src={basketShop} className="img-fluid" width={30} />{" "}
                     </Link>
                   </li>
                 </>

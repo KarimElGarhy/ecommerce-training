@@ -22,7 +22,7 @@ export default function CartContextProvider(props) {
 
   function getCartItems() {
     return axios
-      .get(`https://ecommerce.routemisr.com/api/v1/cart`, {}, { headers })
+      .get(`https://ecommerce.routemisr.com/api/v1/cart`, { headers })
       .then((response) => response)
       .catch((error) => error)
   }
