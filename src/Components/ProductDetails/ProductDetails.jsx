@@ -18,7 +18,7 @@ function ProductDetails() {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
-  let { addToCart } = useContext(CartContext)
+  let { addToCart, setFirstNumberOfItems } = useContext(CartContext)
 
   let params = useParams()
 
@@ -41,6 +41,7 @@ function ProductDetails() {
 
     if (x.data.status == "success") {
       toast.success(x.data.message)
+      setFirstNumberOfItems(x.data.numOfCartItems)
     } else {
       toast.error(x.data.message)
     }

@@ -1,11 +1,24 @@
 import axios from "axios"
-import { createContext } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export let CartContext = createContext()
 
 export default function CartContextProvider(props) {
+  const [firstnumberOfItems, setFirstNumberOfItems] = useState(0)
+  const [cartId, setCartId] = useState(null)
+
+  useEffect(() => {
+    getIntItemsNumbers()
+  }, [])
+
   let headers = {
     token: localStorage.getItem("userToken"),
+  }
+
+  async function getIntItemsNumbers() {
+    let { data } = await getCartItems()
+    setFirstNumberOfItems(data?.numOfCartItems)
+    setCartId(data?.data._id)
   }
 
   function changeItemQuantity(id, count) {
@@ -61,6 +74,8 @@ export default function CartContextProvider(props) {
         removeCartItem,
         clearCartItems,
         changeItemQuantity,
+        firstnumberOfItems,
+        setFirstNumberOfItems,
       }}
     >
       {props.children}

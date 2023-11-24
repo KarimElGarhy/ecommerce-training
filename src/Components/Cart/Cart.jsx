@@ -10,12 +10,18 @@ function Cart() {
   const [numberOfItems, setNumberOfItems] = useState(null)
   const [totalCartPrice, setTotalCartPrice] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  let { getCartItems, removeCartItem, clearCartItems, changeItemQuantity } =
-    useContext(CartContext)
+  let {
+    getCartItems,
+    removeCartItem,
+    clearCartItems,
+    changeItemQuantity,
+    setFirstNumberOfItems,
+  } = useContext(CartContext)
 
   async function removeCartItems() {
     clearCartItems()
     setProductsDetails([])
+    setFirstNumberOfItems(0)
   }
 
   async function removeItem(id) {
@@ -23,6 +29,7 @@ function Cart() {
     setProductsDetails(data.data.products)
     setNumberOfItems(data.numOfCartItems)
     setProductsDetails(data.data.products)
+    setFirstNumberOfItems(data.numOfCartItems)
   }
   async function getCartDetails() {
     let { data } = await getCartItems()
@@ -37,6 +44,7 @@ function Cart() {
       setTotalCartPrice(data.data.totalCartPrice)
       setNumberOfItems(data.numOfCartItems)
       setProductsDetails(data.data.products)
+      setFirstNumberOfItems(data.numOfCartItems)
 
       if (newCount === 0) {
         await removeItem(id)
@@ -164,12 +172,20 @@ function Cart() {
               </h5>
             </div>
 
-            <button
-              onClick={() => removeCartItems()}
-              className="btn btn-danger w-50 mx-auto"
-            >
-              Clear Cart
-            </button>
+            <div className="row">
+              <div className="col-6">
+                <button
+                  onClick={() => removeCartItems()}
+                  className="btn btn-danger w-25 mx-start"
+                >
+                  Clear Cart
+                </button>
+              </div>
+              <div className="col-6">
+                {" "}
+                <button className="btn btn-primary w-100">Checkout</button>
+              </div>
+            </div>
           </div>
         )}
       </div>

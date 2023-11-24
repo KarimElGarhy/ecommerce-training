@@ -7,11 +7,12 @@ import { CartContext } from "../Context/CartContext"
 import toast from "react-hot-toast"
 
 function ProductCard(props) {
-  let { addToCart } = useContext(CartContext)
+  let { addToCart, setFirstNumberOfItems } = useContext(CartContext)
   async function addCart(id) {
     let x = await addToCart(props.id)
     if (x.data.status == "success") {
       toast.success(x.data.message)
+      setFirstNumberOfItems(x.data.numOfCartItems)
     } else {
       toast.error(x.data.message)
     }

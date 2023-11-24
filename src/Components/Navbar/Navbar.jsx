@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import logo from "../../assets/freshcart-logo.svg"
 import { userContext } from "../Context/UserContext"
 import basketShop from "../../assets/shopping-basket.svg"
+import { CartContext } from "../Context/CartContext"
 function Navbar() {
   let { userToken, setUserToken } = useContext(userContext)
+
+  let { firstnumberOfItems } = useContext(CartContext)
 
   let navigate = useNavigate()
 
@@ -50,6 +53,9 @@ function Navbar() {
                   <li className="nav-item">
                     <Link className="nav-link" to="/cart">
                       <img src={basketShop} className="img-fluid" width={30} />{" "}
+                      <span className="bg-main text-white p-1 rounded-1">
+                        {firstnumberOfItems}
+                      </span>
                     </Link>
                   </li>
                 </>
