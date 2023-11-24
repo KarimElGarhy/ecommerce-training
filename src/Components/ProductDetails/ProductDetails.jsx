@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Slider from "react-slick"
 import { Helmet } from "react-helmet"
 import { CartContext } from "../Context/CartContext"
+import { WishlistContext } from "../Context/WishlistContext"
 import toast from "react-hot-toast"
 
 function ProductDetails() {
@@ -19,6 +20,7 @@ function ProductDetails() {
     slidesToScroll: 1,
   }
   let { addToCart, setFirstNumberOfItems } = useContext(CartContext)
+  let { addToWishList } = useContext(WishlistContext)
 
   let params = useParams()
 
@@ -42,6 +44,16 @@ function ProductDetails() {
     if (x.data.status == "success") {
       toast.success(x.data.message)
       setFirstNumberOfItems(x.data.numOfCartItems)
+    } else {
+      toast.error(x.data.message)
+    }
+  }
+
+  async function addToWishListUser(id) {
+    let x = await addToWishList(OurData.id)
+
+    if (x.data.status == "success") {
+      toast.success(x.data.message)
     } else {
       toast.error(x.data.message)
     }
@@ -85,6 +97,19 @@ function ProductDetails() {
               </Slider>
             </div>
             <div className="col-5 d-flex flex-column text-start align-content-center justify-content-center">
+              <button
+                onClick={() => {
+                  addToWishListUser(OurData?.id)
+                }}
+                className="btn text-start"
+              >
+                {" "}
+                <FontAwesomeIcon
+                  color="red"
+                  icon="fa-solid fa-heart"
+                ></FontAwesomeIcon>{" "}
+                {"Add To Wishlist"}
+              </button>
               <p>{OurData?.description}</p>
               <div className="d-flex justify-content-between">
                 <p>

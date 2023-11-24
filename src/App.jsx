@@ -26,6 +26,7 @@ import {
   faMoneyBillWave,
   faStar,
   faUsers,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons"
 
 faMoneyBillWave
@@ -35,6 +36,8 @@ import { userContext } from "./Components/Context/UserContext"
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute"
 import ProductDetails from "./Components/ProductDetails/ProductDetails"
 import CartContextProvider from "./Components/Context/CartContext"
+import Wishlist from "./Components/Wishlist/Wishlist"
+import WishlistContextProvider from "./Components/Context/WishlistContext"
 
 library.add(
   faTwitter,
@@ -44,7 +47,8 @@ library.add(
   faStar,
   faMoneyBillWave,
   faUsers,
-  faDiagramProject
+  faDiagramProject,
+  faHeart
 )
 let routers = createBrowserRouter([
   {
@@ -56,6 +60,14 @@ let routers = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "wishlist",
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
           </ProtectedRoute>
         ),
       },
@@ -127,7 +139,9 @@ function App() {
   }, [])
   return (
     <CartContextProvider>
-      <RouterProvider router={routers}></RouterProvider>
+      <WishlistContextProvider>
+        <RouterProvider router={routers}></RouterProvider>
+      </WishlistContextProvider>
     </CartContextProvider>
   )
 }

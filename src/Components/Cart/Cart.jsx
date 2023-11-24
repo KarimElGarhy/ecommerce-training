@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import Style from "./Cart.module.css"
 import { Helmet } from "react-helmet"
-import axios from "axios"
+
 import { CartContext } from "../Context/CartContext"
 import { useNavigate } from "react-router-dom"
 import { Circles } from "react-loader-spinner"
@@ -28,7 +28,6 @@ function Cart() {
     let { data } = await removeCartItem(id)
     setProductsDetails(data.data.products)
     setNumberOfItems(data.numOfCartItems)
-    setProductsDetails(data.data.products)
     setFirstNumberOfItems(data.numOfCartItems)
   }
   async function getCartDetails() {
@@ -97,7 +96,7 @@ function Cart() {
                       <p>
                         Item Brand: {"  "}
                         <span className="text-main fw-bold">
-                          {product.product.brand.name}{" "}
+                          {product.product.brand?.name}
                         </span>
                       </p>
                       <p>
