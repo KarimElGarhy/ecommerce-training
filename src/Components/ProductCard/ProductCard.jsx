@@ -5,14 +5,27 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartContext } from "../Context/CartContext"
 import toast from "react-hot-toast"
+import { WishlistContext } from "../Context/WishlistContext"
 
 function ProductCard(props) {
   let { addToCart, setFirstNumberOfItems } = useContext(CartContext)
+  let { addToWishList, initNumberOfWishListItems } = useContext(WishlistContext)
   async function addCart(id) {
     let x = await addToCart(props.id)
     if (x.data.status == "success") {
       toast.success(x.data.message)
       setFirstNumberOfItems(x.data.numOfCartItems)
+    } else {
+      toast.error(x.data.message)
+    }
+  }
+
+  async function addToWishListUser(id) {
+    let x = await addToWishList(props.id)
+
+    if (x.data.status == "success") {
+      toast.success(x.data.message)
+      initNumberOfWishListItems()
     } else {
       toast.error(x.data.message)
     }
@@ -45,6 +58,7 @@ function ProductCard(props) {
               />
               {props.productPrice} EGP
             </p>
+
             <p className="d-flex gap-2 align-items-center">
               <FontAwesomeIcon color="#F4CE14" icon="fa-solid fa-star" />
               {props.ratingsAverage}
@@ -56,6 +70,20 @@ function ProductCard(props) {
           >
             Add To Cart
           </Link>
+
+          <button
+            onClick={() => {
+              addToWishListUser(props?.id)
+            }}
+            className="btn text-start"
+          >
+            {" "}
+            <FontAwesomeIcon
+              color="red"
+              icon="fa-solid fa-heart"
+            ></FontAwesomeIcon>{" "}
+            {"Add To Wishlist"}
+          </button>
         </div>
       </div>
     </div>

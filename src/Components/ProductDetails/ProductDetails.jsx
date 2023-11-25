@@ -20,7 +20,7 @@ function ProductDetails() {
     slidesToScroll: 1,
   }
   let { addToCart, setFirstNumberOfItems } = useContext(CartContext)
-  let { addToWishList } = useContext(WishlistContext)
+  let { addToWishList, initNumberOfWishListItems } = useContext(WishlistContext)
 
   let params = useParams()
 
@@ -51,7 +51,7 @@ function ProductDetails() {
 
   async function addToWishListUser(id) {
     let x = await addToWishList(OurData.id)
-
+    initNumberOfWishListItems()
     if (x.data.status == "success") {
       toast.success(x.data.message)
     } else {

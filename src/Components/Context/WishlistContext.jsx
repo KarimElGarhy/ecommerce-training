@@ -1,10 +1,18 @@
 import axios from "axios"
-import { createContext } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export let WishlistContext = createContext()
 export default function WishlistContextProvider(props) {
+  const [numberOfWishListItems, setNumberOfWishListItems] = useState(0)
   let headers = {
     token: localStorage.getItem("userToken"),
+  }
+  useEffect(() => {
+    initNumberOfWishListItems()
+  }, [])
+  async function initNumberOfWishListItems() {
+    let { data } = await getUserWishList()
+    setNumberOfWishListItems(data.count)
   }
   function addToWishList(productId) {
     return axios
@@ -35,7 +43,14 @@ export default function WishlistContextProvider(props) {
 
   return (
     <WishlistContext.Provider
-      value={{ addToWishList, removeWishListItem, getUserWishList }}
+      value={{
+        addToWishList,
+        removeWishListItem,
+        getUserWishList,
+        numberOfWishListItems,
+        setNumberOfWishListItems,
+        initNumberOfWishListItems,
+      }}
     >
       {" "}
       {props.children}

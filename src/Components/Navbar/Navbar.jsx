@@ -6,13 +6,15 @@ import logo from "../../assets/freshcart-logo.svg"
 import { userContext } from "../Context/UserContext"
 import basketShop from "../../assets/shopping-basket.svg"
 import { CartContext } from "../Context/CartContext"
+import { WishlistContext } from "../Context/WishlistContext"
 function Navbar() {
   let { userToken, setUserToken } = useContext(userContext)
 
   let { firstnumberOfItems } = useContext(CartContext)
 
-  let navigate = useNavigate()
+  let { numberOfWishListItems } = useContext(WishlistContext)
 
+  let navigate = useNavigate()
   function logOut() {
     localStorage.removeItem("userToken")
     setUserToken(null)
@@ -36,11 +38,6 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/wishlist">
-                      Wishlist
-                    </Link>
-                  </li>
-                  <li className="nav-item">
                     <Link className="nav-link" to="/brands">
                       Brands
                     </Link>
@@ -55,6 +52,18 @@ function Navbar() {
                       <img src={basketShop} className="img-fluid" width={30} />{" "}
                       <span className="bg-main text-white p-1 rounded-1">
                         {firstnumberOfItems}
+                      </span>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/wishlist">
+                      <FontAwesomeIcon
+                        color="red"
+                        width={30}
+                        icon="fa-solid fa-heart"
+                      ></FontAwesomeIcon>
+                      <span className="bg-main text-white p-1 rounded-1">
+                        {numberOfWishListItems}
                       </span>
                     </Link>
                   </li>
