@@ -3,6 +3,8 @@ import "./App.css"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import Layout from "./Components/Layout/Layout"
 import Home from "./Components/Home/Home"
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword"
+import PasswordChange from "./Components/PasswordChange/PasswordChange"
 import Cart from "./Components/Cart/Cart"
 import Brands from "./Components/Brands/Brands"
 import Checkout from "./Components/checkout/checkout"
@@ -36,6 +38,7 @@ import ProductDetails from "./Components/ProductDetails/ProductDetails"
 import CartContextProvider from "./Components/Context/CartContext"
 import Wishlist from "./Components/Wishlist/Wishlist"
 import WishlistContextProvider from "./Components/Context/WishlistContext"
+import ResetPassword from "./Components/ResetPassword/ResetPassword"
 
 library.add(
   faTwitter,
@@ -119,6 +122,18 @@ let routers = createBrowserRouter([
             <AllOder />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "forgetPassword",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "resetPassword",
+        element: <ResetPassword />,
+      },
+      {
+        path: "passwordChange",
+        element: <PasswordChange />,
       },
       {
         path: "product/:productId/:productName",

@@ -12,7 +12,7 @@ export default function WishlistContextProvider(props) {
   }, [])
   async function initNumberOfWishListItems() {
     let { data } = await getUserWishList()
-    setNumberOfWishListItems(data.count)
+    setNumberOfWishListItems(data?.count)
   }
   function addToWishList(productId) {
     return axios

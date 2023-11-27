@@ -7,8 +7,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { Hourglass } from "react-loader-spinner"
 import { userContext } from "../Context/UserContext"
 import { Helmet } from "react-helmet"
+import { jwtDecode } from "jwt-decode"
 function Login() {
-  let { setUserToken } = useContext(userContext)
+  let { setUserToken, setUserID, userId } = useContext(userContext)
   let navigate = useNavigate()
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -23,8 +24,11 @@ function Login() {
       })
     if (data.message == `success`) {
       localStorage.setItem("userToken", data.token)
+      const decodedToken = jwtDecode(data.token)
+      localStorage.setItem("userId", decodedToken.id)
       setUserToken(data.token)
       setIsLoading(false)
+
       navigate(`/`)
     }
   }
@@ -132,6 +136,9 @@ function Login() {
                 >
                   Register now
                 </Link>
+              </button>
+              <button className="btn bg-main text-white">
+                <Link to="/forgetpassword"> Forget Password</Link>
               </button>
             </div>
           )}

@@ -10,13 +10,16 @@ import { WishlistContext } from "../Context/WishlistContext"
 function Navbar() {
   let { userToken, setUserToken } = useContext(userContext)
 
-  let { firstnumberOfItems } = useContext(CartContext)
+  let { firstnumberOfItems, setFirstNumberOfItems } = useContext(CartContext)
 
-  let { numberOfWishListItems } = useContext(WishlistContext)
+  let { numberOfWishListItems, setNumberOfWishListItems } =
+    useContext(WishlistContext)
 
   let navigate = useNavigate()
   function logOut() {
     localStorage.removeItem("userToken")
+    localStorage.removeItem("userId")
+
     setUserToken(null)
     navigate(`/login`)
   }
