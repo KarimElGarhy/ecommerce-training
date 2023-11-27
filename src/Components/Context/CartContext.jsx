@@ -4,21 +4,32 @@ import { createContext, useEffect, useState } from "react"
 export let CartContext = createContext()
 
 export default function CartContextProvider(props) {
-  const [firstnumberOfItems, setFirstNumberOfItems] = useState(0)
-  const [cartId, setCartId] = useState(null)
-
   useEffect(() => {
     getIntItemsNumbers()
   }, [])
-
-  let headers = {
-    token: localStorage.getItem("userToken"),
-  }
+  const [firstnumberOfItems, setFirstNumberOfItems] = useState(0)
+  const [cartId, setCartId] = useState(null)
 
   async function getIntItemsNumbers() {
     let { data } = await getCartItems()
     setFirstNumberOfItems(data?.numOfCartItems)
     setCartId(data?.data._id)
+  }
+
+  function payment(shippingAddress) {
+    return axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`,
+        {
+          shippingAddress,
+        },
+        { headers }
+      )
+      .then((response) => response)
+      .catch((error) => error)
+  }
+  let headers = {
+    token: localStorage.getItem("userToken"),
   }
 
   function changeItemQuantity(id, count) {
@@ -76,6 +87,7 @@ export default function CartContextProvider(props) {
         changeItemQuantity,
         firstnumberOfItems,
         setFirstNumberOfItems,
+        payment,
       }}
     >
       {props.children}

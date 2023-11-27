@@ -50,9 +50,13 @@ function Navbar() {
                   <li className="nav-item">
                     <Link className="nav-link" to="/cart">
                       <img src={basketShop} className="img-fluid" width={30} />{" "}
-                      <span className="bg-main text-white p-1 rounded-1">
-                        {firstnumberOfItems}
-                      </span>
+                      {firstnumberOfItems == undefined ? (
+                        ``
+                      ) : (
+                        <span className="bg-main text-white p-1 rounded-1">
+                          {firstnumberOfItems}
+                        </span>
+                      )}
                     </Link>
                   </li>
                   <li className="nav-item">

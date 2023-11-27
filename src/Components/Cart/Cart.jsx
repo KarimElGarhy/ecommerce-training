@@ -3,7 +3,7 @@ import Style from "./Cart.module.css"
 import { Helmet } from "react-helmet"
 
 import { CartContext } from "../Context/CartContext"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Circles } from "react-loader-spinner"
 function Cart() {
   const [productsDetails, setProductsDetails] = useState([])
@@ -182,7 +182,9 @@ function Cart() {
               </div>
               <div className="col-6">
                 {" "}
-                <button className="btn btn-primary w-100">Checkout</button>
+                <Link to="/checkout">
+                  <button className="btn btn-primary w-100">Checkout</button>
+                </Link>
               </div>
             </div>
           </div>

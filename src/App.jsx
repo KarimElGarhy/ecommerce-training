@@ -12,7 +12,7 @@ import Notfound from "./Components/Notfound/Notfound"
 import Products from "./Components/Products/Products"
 import Register from "./Components/Register/Register"
 import Categories from "./Components/Categories/Categories"
-
+import AllOder from "./Components/AllOrders/AllOrders"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
   faTwitter,
@@ -28,8 +28,6 @@ import {
   faUsers,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons"
-
-faMoneyBillWave
 
 import { userContext } from "./Components/Context/UserContext"
 
@@ -111,6 +109,14 @@ let routers = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Categories />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "AllOrders",
+        element: (
+          <ProtectedRoute>
+            <AllOder />
           </ProtectedRoute>
         ),
       },
