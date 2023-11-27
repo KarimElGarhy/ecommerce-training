@@ -19,7 +19,7 @@ export default function CartContextProvider(props) {
   function payment(shippingAddress) {
     return axios
       .post(
-        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`,
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://ecommerce-training-4x7v.vercel.app/`,
         {
           shippingAddress,
         },

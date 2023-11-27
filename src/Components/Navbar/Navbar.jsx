@@ -51,6 +51,11 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link" to="/allorders">
+                      All Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" to="/cart">
                       <img src={basketShop} className="img-fluid" width={30} />{" "}
                       {firstnumberOfItems == undefined ? (

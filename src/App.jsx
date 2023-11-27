@@ -39,6 +39,7 @@ import CartContextProvider from "./Components/Context/CartContext"
 import Wishlist from "./Components/Wishlist/Wishlist"
 import WishlistContextProvider from "./Components/Context/WishlistContext"
 import ResetPassword from "./Components/ResetPassword/ResetPassword"
+import AllOrders from "./Components/AllOrders/AllOrders"
 
 library.add(
   faTwitter,
@@ -115,6 +116,7 @@ let routers = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "AllOrders",
         element: (
